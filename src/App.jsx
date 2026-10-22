@@ -7,7 +7,6 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
   const [sortDirection, setSortDirection] = useState('asc');
-  const [bookmarks, setBookmarks] = useState(new Set());
   const [simulateFailure, setSimulateFailure] = useState(false);
   const [request, setRequest] = useState({ revision: 0, fail: false });
   const { tickets, loading, error } = useTickets(workspaceId, request);
@@ -25,14 +24,6 @@ export default function App() {
     const order = first.title.localeCompare(second.title);
     return sortDirection === 'asc' ? order : -order;
   });
-  const totalHours = visibleTickets.reduce((total, ticket) => total + ticket.estimatedHours, 0);
-
-  function toggleBookmark(id) {
-    if (bookmarks.has(id)) bookmarks.delete(id);
-    else bookmarks.add(id);
-    setBookmarks(bookmarks);
-  }
-
   function refreshTickets() {
     setRequest((previous) => ({ revision: previous.revision + 1, fail: simulateFailure }));
   }
@@ -57,12 +48,6 @@ export default function App() {
           <span className="demo-badge"><span className="live-dot" />Demo workspace</span>
         </header>
 
-        <section className="summary-grid" aria-label="Queue summary">
-          <div className="summary-card"><span>Visible tickets</span><strong>{visibleTickets.length}</strong><small>In the current view</small></div>
-          <div className="summary-card"><span>Estimated effort</span><strong><span data-testid="total-hours">{totalHours}</span><em>hrs</em></strong><small>Across visible tickets</small></div>
-          <div className="summary-card"><span>Bookmarked</span><strong data-testid="bookmarked-count">{bookmarks.size}</strong><small>Saved during this session</small></div>
-        </section>
-
         <section className="inbox" aria-labelledby="inbox-title">
           <div className="inbox-heading"><div><h2 id="inbox-title">Your inbox</h2><p>Every conversation, with the context you need.</p></div><button type="button" className="secondary-button" onClick={refreshTickets}>Refresh tickets</button></div>
           <div className="filters">
@@ -79,7 +64,7 @@ export default function App() {
           ) : sortedTickets.length === 0 ? (
             <div className="empty-state"><h3>No tickets found</h3><p>Try a different search or status.</p></div>
           ) : (
-            <div className="ticket-grid">{sortedTickets.map((ticket, index) => <TicketRow key={index} ticket={ticket} bookmarked={bookmarks.has(ticket.id)} onBookmark={toggleBookmark} />)}</div>
+            <div className="ticket-grid">{sortedTickets.map((ticket, index) => <TicketRow key={index} ticket={ticket} />)}</div>
           )}
         </section>
 

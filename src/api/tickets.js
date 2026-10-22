@@ -1,7 +1,6 @@
 import { SUPPORT_TICKETS, BILLING_TICKETS } from './data.js';
 
 // Deterministic local service: no backend, credentials, or network required.
-// The upstream contract represents estimatedHours as decimal strings.
 export function listTickets(workspaceId, { fail = false } = {}) {
   const latency = workspaceId === 'support' ? 650 : 120;
 

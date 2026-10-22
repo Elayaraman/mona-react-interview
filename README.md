@@ -1,6 +1,6 @@
 # QueueDesk — React debugging exercise
 
-**Candidate: Mona · Suggested duration: 60 minutes**
+**Candidate: Mona · Duration: 30 minutes, after setup**
 
 Make the dashboard satisfy the expected behaviours below. Investigate the implementation independently and verify your changes.
 
@@ -28,15 +28,16 @@ The project uses React, JavaScript, Vite, and a local mock API. No backend, acco
 | Empty results | Show a clear empty state when no tickets match. Changing the filters can restore results. |
 | Sorting | The title control toggles ascending and descending order for the visible tickets. |
 | Draft notes | Each ticket has an editable internal draft. Its text stays attached to that same ticket when the list is sorted. |
-| Bookmarks | Bookmarking or removing a bookmark immediately updates the button and count. The count includes bookmarks outside the current workspace or filtered view. |
-| Summary | The visible-ticket count matches the list. Estimated effort is the numeric sum of the visible tickets: all Support tickets total 8 hours, all Billing tickets total 3 hours, and Open Support tickets total 5.5 hours. |
+| Ticket count | The visible-ticket count matches the current list. |
 | Loading | Show a loading indicator while the current request is pending, then display its result. |
 | Request failure | Stop loading and display a useful error message with a Retry action when the current request fails. |
 | Refresh and retry | Refresh reloads the selected workspace. Retry can recover from a failed request and display the tickets. |
 | Failure simulation | Simulate API failure affects subsequent refresh or workspace requests. After it is disabled, a retry can succeed. |
 
-Bookmarks and drafts need not survive a page reload. Draft retention across filtering, refreshes, or workspace changes is outside the exercise; retaining drafts through sorting is required.
+Drafts need not survive a page reload. Draft retention across filtering, refreshes, or workspace changes is outside the exercise; retaining drafts through sorting is required.
 
 ## Verification
 
-Verify the expected behaviours and ensure `npm run build` succeeds. You may write your own tests; `npm test` runs tests you add. At handoff, explain your changes, how you verified them, and any remaining work.
+Install dependencies and start the app before the 30-minute session. Spend roughly 5 minutes understanding the app, 18 minutes investigating and repairing it, and 7 minutes verifying and explaining your changes.
+
+Verify the expected behaviours and ensure `npm run build` succeeds. Automated tests are optional within this time limit; `npm test` runs tests you add. Demonstrate the checks you performed and explain any remaining work.
